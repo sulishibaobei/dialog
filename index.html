@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义弹框</title>
+    <link rel="stylesheet" type="text/css" href="https://front.leyoujia.com/css/bootstrap-reset.css">
+    <link rel="stylesheet" type="text/css" href="https://front.leyoujia.com/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href='dialog.css'>
+    <style>
+        html,
+        body {
+            font-family: 宋体, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            width: 100%;
+            line-height: 1.42857143;
+            color: #000;
+            background-color: #eee;
+            padding-right: 0 !important;
+        }
+        
+        #container {
+            width: 100%;
+            min-height: 450px;
+            -webkit-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+            background-color: #eeeeee;
+        }
+        
+        #main-content {
+            font-family: "宋体", "微软雅黑", "Helvetica", "Arial";
+            background-color: #eeeeee;
+            -webkit-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+            min-width: 987px;
+            max-width: 1180px !important;
+            margin: 0 auto !important;
+        }
+        
+        .panel {
+            border: none;
+        }
+        
+        .panel-heading strong {
+            font-size: 14px;
+        }
+        
+        .panel-border {
+            margin-top: 20px;
+            box-shadow: none;
+        }
+        
+        a {
+            color: #000;
+        }
+        
+        .nav-tabs>li.active>a,
+        .nav-tabs>li.active>a:focus,
+        .nav-tabs>li.active>a:hover {
+            color: red;
+        }
+        
+        a:hover,
+        a:link,
+        a:focus {
+            color: #000;
+        }
+        
+        .content {
+            display: flex;
+            margin-top: 10px;
+            min-height: 300px;
+        }
+        
+        .content-left {
+            flex: 4;
+        }
+        
+        .content-right {
+            flex: 6;
+        }
+        
+        .content-right p {
+            font-size: 13px;
+            background: #eee;
+            line-height: 28px;
+            padding: 0px 5px;
+            font-family: 微软雅黑;
+        }
+        
+        .content-right p:first-child {
+            color: red;
+        }
+        
+        .direction {
+            margin: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 5px 5px 5px 5px #ccc;
+            padding: 10px;
+            background: #f7efef;
+        }
+        
+        .bold {
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background: #3188e8;
+            border-color: #3188e8;
+            padding: 5px 22px;
+        }
+        
+        .modal-footer {
+            border-top: none;
+        }
+        
+        .modal-dialog {
+            z-index: 1060;
+        }
+    </style>
+</head>
+
+<body>
+    <section id='container'>
+        <section id='main-content'>
+            <div class='panel panel-body'>
+                <div class='panel panel-heading'>
+                    <strong> 一张会动的图</strong>
+                </div>
+                <img src="dialog.gif" class="img-thumbnail">
+                <div class='panel panel-border'>
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#home" data-toggle="tab">两个按钮的弹框</a>
+                        </li>
+                        <li>
+                            <a href="#ios" data-toggle="tab">一个按钮的弹框</a>
+                        </li>
+                        <li>
+                            <a href="#ejb" data-toggle="tab">没有按钮的弹框</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+                            <div class='content'>
+                                <div class='content-left'>
+                                    <div class='direction'>
+                                        <h4 class='bold'>使用说明：适用于各个弹框</h4>
+                                        <p>1.引入dialog.css</p>
+                                        <p>2.引入jquery,dialog.min.js/dialog.js</p>
+                                        <p>3.通过dialog.xx()方法来调用</p>
+                                    </div>
+                                </div>
+                                <div class='content-right'>
+                                    <p>代码解析：</p>
+                                    <p>twoBtnDialog(content, width, btnSure, btnCancel)</p>
+                                    <p>譬如：dialog.twoBtnDialog('我可是有两个Btn',300, btnSure,btnCancel)</p>
+                                    <p>
+                                        var btnSure = [{ value: '确定', callback: function() { } }]; var btnCancel = [{ value: '取消', callback: function() { }]
+                                    </p>
+                                    <P>callback:function(){} 可以执行你想做的操作</P>
+                                    <button class='btn btn-primary clickme'>点我</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ios">
+                            <div class='content'>
+                                <div class='content-right'>
+                                    <p>代码解析：</p>
+                                    <p> oneBtnDialog(content, width, btnCancel, time)</p>
+                                    <p>譬如：dialog.oneBtnDialog('我有一个Btn',300, '取消')</p>
+                                    <P>后面的三个参数可以缺省，甚至你可以这样写dialog.oneBtnDialog('我有一个Btn');</P>
+                                    <button class='btn btn-primary clickme1'>点我</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ejb">
+                            <div class='content'>
+                                <div class='content-right'>
+                                    <p>代码解析：</p>
+                                    <p> noBtnDialog(content, width, time)</p>
+                                    <p>譬如：dialog.noBtnDialog('我是一闪而过的弹框',300, 1000)</p>
+                                    <P>后面两个参数可以缺省，你能这样写dialog.noBtnDialog('我是一闪而过的弹框')</P>
+                                    <button class='btn btn-primary clickme2'>点我</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        我是一个模态框
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    嗨，see you
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://front.leyoujia.com:8088/js/jquery.js"></script>
+    <script src="https://front.leyoujia.com:8088/js/bootstrap.js"></script>
+    <script src="dialog.min.js"></script>
+    <script>
+        $(function() {
+            $('body').on('click', '.clickme', function() {
+                var btnSure = [{
+                    value: '确定',
+                    callback: function() {
+                        $("#myModal").modal('show');
+                    }
+                }];
+                var btnCancel = [{
+                    value: '取消',
+                    callback: function() {
+                        return false;
+                    }
+                }]
+                dialog.twoBtnDialog('这是一个弹框', 300, btnSure, btnCancel);
+            })
+        })
+
+        $('body').on('click', '.clickme1', function() {
+            dialog.oneBtnDialog('这是一个弹框', 300, '取消', 1000);
+        })
+        $('body').on('click', '.clickme2', function() {
+            dialog.noBtnDialog('我是一闪而过的弹框');
+        })
+    </script>
+</body>
+
+</html>
