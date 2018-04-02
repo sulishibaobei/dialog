@@ -236,13 +236,9 @@
 
 
         $('body').on('click', '.clickme1', function() {
-            var btnCancel = [{
-                value: '取消',
-                callback: function() {
-                    return false;
-                }
-            }]
-            dialog.oneBtnDialog('这是一个弹框', 300, btnCancel, 1000);
+            dialog.oneBtnDialog('这是一个弹框', 300, '关闭', function() {
+                console.log(1);
+            }, 1000);
         })
         $('body').on('click', '.clickme2', function() {
             dialog.noBtnDialog('我是一闪而过的弹框');

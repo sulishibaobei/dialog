@@ -1,7 +1,7 @@
 (function(window) {
     var btnsure = '',
         btncancel = '',
-        width, content, time;
+        width, content, time, callback;
 
     function posContentDialog(obj) {
         var clientX = document.body.clientWidth;
@@ -52,11 +52,12 @@
         obj.css('line-height', obj.height() + 'px')
     }
     class dialog {
-        constructor(content, width, btnSure, btnCancel, time) {
+        constructor(content, width, btnSure, btnCancel, callback, time) {
             this.content = content,
                 this.width = width,
                 this.btnSure = btnSure,
                 this.btnCancel = btnCancel,
+                this.callback = callback,
                 this.time = time
         }
 
@@ -94,34 +95,32 @@
         }
         onebtnDialog() {
             width = (this.width || 300) + 'px';
-            if (typeof this.btnCancel == 'object') {
-                btncancel = this.btnCancel[0].value;
-                Cancel(this.btnCancel[0].callback)
-            } else {
-                btncancel = this.btnCancel || '关闭';
-                Cancel(false);
-            }
+            btncancel = this.btnCancel || '关闭';
             var dialog = " <div class='dialog'><div class='dialog-shadow'></div> <div class='dialog-content' style='width:" + width + "'><div class='title'>" + this.content + "</div><div class='dialog-footer'><button class='cancel'>" + btncancel + "</button></div></div></div> ";
             $('body').append(dialog);
             var obj = $('body').find('.dialog').last();
             posContentDialog(obj.find('.dialog-content'));
-            if (this.time) {
-                time = this.time || 1500;
-                setTimeout(function() {
-                    obj.remove()
-                }, time)
+            Cancel(false);
+            if (this.callback) {
+                this.callback();
             }
+
+            time = this.time || 1500;
+            setTimeout(function() {
+                obj.remove()
+            }, time)
+
         }
     }
     window.dialog = {
         twoBtnDialog: function(content, width, btnSure, btnCancel) {
             new dialog(content, width, btnSure, btnCancel).whetherDialog()
         },
-        oneBtnDialog: function(content, width, btnCancel, time) {
-            new dialog(content, width, '', btnCancel, time).onebtnDialog()
+        oneBtnDialog: function(content, width, btnCancel, callback, time) {
+            new dialog(content, width, '', btnCancel, callback, time).onebtnDialog()
         },
         noBtnDialog: function(content, width, time) {
-            new dialog(content, width, '', '', time).nobtnDialog()
+            new dialog(content, width, '', '', '', time).nobtnDialog()
         }
     }, window.onresize = function() {
         posContentDialog($('.dialog-content'))
