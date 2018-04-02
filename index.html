@@ -214,7 +214,7 @@
     </div>
     <script src="https://front.leyoujia.com:8088/js/jquery.js"></script>
     <script src="https://front.leyoujia.com:8088/js/bootstrap.js"></script>
-    <script src="dialog.min.js"></script>
+    <script src="dialog.js"></script>
     <script>
         $(function() {
             $('body').on('click', '.clickme', function() {
@@ -234,8 +234,15 @@
             })
         })
 
+
         $('body').on('click', '.clickme1', function() {
-            dialog.oneBtnDialog('这是一个弹框', 300, '取消', 1000);
+            var btnCancel = [{
+                value: '取消',
+                callback: function() {
+                    return false;
+                }
+            }]
+            dialog.oneBtnDialog('这是一个弹框', 300, btnCancel, 1000);
         })
         $('body').on('click', '.clickme2', function() {
             dialog.noBtnDialog('我是一闪而过的弹框');
