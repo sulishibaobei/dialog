@@ -169,9 +169,10 @@
                             <div class='content'>
                                 <div class='content-right'>
                                     <p>代码解析：</p>
-                                    <p> oneBtnDialog(content, width, btnCancel, time)</p>
-                                    <p>譬如：dialog.oneBtnDialog('我有一个Btn',300, '取消')</p>
+                                    <p> oneBtnDialog(content, width, btnCancel,callback, time)</p>
+                                    <p>譬如：dialog.oneBtnDialog('我有一个Btn',300,'取消', function(){},1000)</p>
                                     <P>后面的三个参数可以缺省，甚至你可以这样写dialog.oneBtnDialog('我有一个Btn');</P>
+                                    <p>又或者你可以在function里面做一些操作</p>
                                     <button class='btn btn-primary clickme1'>点我</button>
                                 </div>
                             </div>
